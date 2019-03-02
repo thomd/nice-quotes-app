@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, View, Button } from "react-native";
 import Quote from "./js/components/Quote";
 
 const data = [

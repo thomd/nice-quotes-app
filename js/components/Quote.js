@@ -1,13 +1,12 @@
-import React, { Component, Fragment } from "react";
+import React, { Fragment } from "react";
 import { Text } from "react-native";
 
-export default class Quote extends Component {
-  render() {
-    return (
-      <Fragment>
-        <Text>{this.props.text}</Text>
-        <Text>-- {this.props.author}</Text>
-      </Fragment>
-    );
-  }
-}
+export default props => {
+  const { text, author } = props;
+  return (
+    <Fragment>
+      <Text>{text}</Text>
+      <Text>-- {author}</Text>
+    </Fragment>
+  );
+};
