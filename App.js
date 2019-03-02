@@ -38,9 +38,7 @@ export default class App extends Component {
     const quote = data[index];
     return (
       <View style={styles.container}>
-        <Text>{quote.text}</Text>
-        <Text>-- {quote.author}</Text>
-        <Quote />
+        <Quote text={quote.text} author={quote.author} />
         <Button title="Nächstes Zitat" onPress={this.nextQuote} />
         <Button title="Vorheriges Zitat" onPress={this.previousQuote} />
       </View>
