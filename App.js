@@ -39,8 +39,12 @@ export default class App extends Component {
     return (
       <View style={styles.container}>
         <Quote text={quote.text} author={quote.author} />
-        <Button title="Nächstes Zitat" onPress={this.nextQuote} />
-        <Button title="Vorheriges Zitat" onPress={this.previousQuote} />
+        <View style={styles.nextButton}>
+          <Button title="Nächstes Zitat" onPress={this.nextQuote} />
+        </View>
+        <View style={styles.prevButton}>
+          <Button title="Vorheriges Zitat" onPress={this.previousQuote} />
+        </View>
       </View>
     );
   }
@@ -52,5 +56,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center"
+  },
+  nextButton: {
+    position: "absolute",
+    bottom: 50,
+    right: 30
+  },
+  prevButton: {
+    position: "absolute",
+    bottom: 50,
+    left: 30
   }
 });
