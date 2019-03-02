@@ -1,12 +1,26 @@
-import React, { Fragment } from "react";
-import { Text } from "react-native";
+import React from "react";
+import { StyleSheet, View, Text } from "react-native";
 
 export default props => {
   const { text, author } = props;
   return (
-    <Fragment>
-      <Text>{text}</Text>
-      <Text>-- {author}</Text>
-    </Fragment>
+    <View style={styles.container}>
+      <Text style={styles.text}>{text}</Text>
+      <Text style={styles.author}>&mdash; {author}</Text>
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 30
+  },
+  text: {
+    fontSize: 36,
+    fontStyle: "italic",
+    marginBottom: 20
+  },
+  author: {
+    fontSize: 20
+  }
+});

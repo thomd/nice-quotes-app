@@ -5,7 +5,7 @@ import Quote from "./js/components/Quote";
 const data = [
   {
     text:
-      "Probleme kann man niemals mit der selbsen Denkweise lösen, durch die sie entstanden sind",
+      "Probleme kann man niemals mit der selben Denkweise lösen, durch die sie entstanden sind",
     author: "Albert Einstein"
   },
   {
@@ -48,7 +48,6 @@ export default class App extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    padding: "10%",
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
