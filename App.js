@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Button } from "react-native";
+import { StyleSheet, Platform, View, Button } from "react-native";
 import Quote from "./js/components/Quote";
 
 const data = [
@@ -53,18 +53,18 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#eee",
     alignItems: "center",
     justifyContent: "center"
   },
   nextButton: {
     position: "absolute",
-    bottom: 50,
-    right: 30
+    bottom: Platform.OS === "ios" ? 50 : 20,
+    right: 20
   },
   prevButton: {
     position: "absolute",
-    bottom: 50,
-    left: 30
+    bottom: Platform.OS === "ios" ? 50 : 20,
+    left: 20
   }
 });
