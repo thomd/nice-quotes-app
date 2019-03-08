@@ -1,9 +1,9 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 44354,
-  "expoServerNgrokUrl": "https://vi-kd6.anonymous.nicequotes.exp.direct",
-  "packagerNgrokUrl": "https://packager.vi-kd6.anonymous.nicequotes.exp.direct",
-  "ngrokPid": 44533
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null
 }
