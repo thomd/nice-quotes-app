@@ -30,13 +30,13 @@ const styles = StyleSheet.create({
     borderRadius: 6
   },
   text: {
-    fontSize: 30,
+    fontSize: 24,
     fontStyle: "italic",
     marginBottom: 20,
     textAlign: "center"
   },
   author: {
-    fontSize: 20,
+    fontSize: 18,
     textAlign: "right"
   }
 });

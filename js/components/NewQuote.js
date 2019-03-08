@@ -1,11 +1,13 @@
 import React, { Component } from "react";
-import { Button, TextInput } from "react-native";
+import { Button, Modal } from "react-native";
 
 export default class NewQuote extends Component {
   render() {
-    if (this.props.visible === false) {
-      return null;
-    }
-    return <Button title="Speichern" onPress={this.props.onSave} />;
+    const { visible, onSave } = this.props;
+    return (
+      <Modal visible={visible} onRequestClose={onSave} animationType="slide">
+        <Button title="Speichern" onPress={onSave} />
+      </Modal>
+    );
   }
 }
