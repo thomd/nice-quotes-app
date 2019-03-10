@@ -20,17 +20,17 @@ const data = [
 ];
 
 export default class App extends Component {
-  state = { index: 0, showNewQuoteScreen: false };
+  state = { index: 0, showNewQuoteScreen: false, quotes: data };
 
   _nextQuote = () => {
     this.setState(state => ({
-      index: (state.index + 1) % data.length
+      index: (state.index + 1) % state.quotes.length
     }));
   };
 
   _previousQuote = () => {
     this.setState(state => ({
-      index: (state.index - 1 + data.length) % data.length
+      index: (state.index - 1 + state.quotes.length) % state.quotes.length
     }));
   };
 
@@ -40,15 +40,17 @@ export default class App extends Component {
     }));
   };
 
-  _addQuote = () => {
-    this.setState(state => ({
-      showNewQuoteScreen: false
-    }));
+  _addQuote = (text, author) => {
+    let { quotes } = this.state;
+    if (text && author) {
+      quotes.push({ text, author });
+    }
+    this.setState(state => ({ showNewQuoteScreen: false, quotes }));
   };
 
   render() {
-    let { index } = this.state;
-    const quote = data[index];
+    let { index, quotes } = this.state;
+    const quote = quotes[index];
     return (
       <View style={styles.container}>
         <View style={styles.newButton}>
@@ -60,7 +62,7 @@ export default class App extends Component {
         />
         <Quote text={quote.text} author={quote.author} />
         <View style={styles.nextButton}>
-          <Button title="Nächstes Zitat" onPress={this._nextQuote} />
+          <Button title="Nächstes" onPress={this._nextQuote} />
         </View>
         <View style={styles.prevButton}>
           <Button title="Vorheriges Zitat" onPress={this._previousQuote} />
