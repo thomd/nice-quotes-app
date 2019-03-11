@@ -1,12 +1,13 @@
 import React, { Component } from "react";
-import { StyleSheet, Platform, View, Button } from "react-native";
+import { AsyncStorage, StyleSheet, Platform, View } from "react-native";
 import Quote from "./js/components/Quote";
 import NewQuote from "./js/components/NewQuote";
+import StyledButton from "./js/components/StyledButton";
 
 const data = [
   {
     text:
-      "Probleme kann man niemals mit der selben Denkweise lösen, durch die sie entstanden sind",
+      "Probleme kann man niemals mit der selben Denkweise lösen, durch die sie entstanden sind.",
     author: "Albert Einstein"
   },
   {
@@ -14,8 +15,9 @@ const data = [
     author: "Marie Curie"
   },
   {
-    text: "Nichts ist so beständig wie der Wandel",
-    author: "Heraklit"
+    text:
+      "Es ist schwieriger, eine vorgefasste Meinung zu zertrümmern als ein Atom.",
+    author: "Albert Einstein"
   }
 ];
 
@@ -40,33 +42,60 @@ export default class App extends Component {
     }));
   };
 
+  _retrieveData() {
+    AsyncStorage.getItem("QUOTES").then(value => {
+      if (value) {
+        this.setState({ quotes: JSON.parse(value) });
+      }
+    });
+  }
+
+  _storeData(quotes) {
+    AsyncStorage.setItem("QUOTES", JSON.stringify(quotes));
+  }
+
   _addQuote = (text, author) => {
     let { quotes } = this.state;
     if (text && author) {
       quotes.push({ text, author });
+      this._storeData(quotes);
     }
-    this.setState(state => ({ showNewQuoteScreen: false, quotes }));
+    this.setState(state => ({
+      index: quotes.length - 1,
+      showNewQuoteScreen: false,
+      quotes
+    }));
   };
+
+  componentDidMount() {
+    this._retrieveData();
+  }
 
   render() {
     let { index, quotes } = this.state;
     const quote = quotes[index];
     return (
       <View style={styles.container}>
-        <View style={styles.newButton}>
-          <Button title="Neues Zitat" onPress={this._showNewQuote} />
-        </View>
+        <StyledButton
+          style={styles.newButton}
+          title="Neues Zitat"
+          onPress={this._showNewQuote}
+        />
         <NewQuote
           visible={this.state.showNewQuoteScreen}
           onSave={this._addQuote}
         />
         <Quote text={quote.text} author={quote.author} />
-        <View style={styles.nextButton}>
-          <Button title="Nächstes" onPress={this._nextQuote} />
-        </View>
-        <View style={styles.prevButton}>
-          <Button title="Vorheriges" onPress={this._previousQuote} />
-        </View>
+        <StyledButton
+          style={styles.nextButton}
+          title="Nächstes"
+          onPress={this._nextQuote}
+        />
+        <StyledButton
+          style={styles.prevButton}
+          title="Vorheriges"
+          onPress={this._previousQuote}
+        />
       </View>
     );
   }
