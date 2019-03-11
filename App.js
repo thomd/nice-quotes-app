@@ -1,28 +1,11 @@
 import React, { Component } from "react";
-import { AsyncStorage, StyleSheet, Platform, View } from "react-native";
+import { AsyncStorage, StyleSheet, Platform, View, Text } from "react-native";
 import Quote from "./js/components/Quote";
 import NewQuote from "./js/components/NewQuote";
 import StyledButton from "./js/components/StyledButton";
 
-const data = [
-  {
-    text:
-      "Probleme kann man niemals mit der selben Denkweise lösen, durch die sie entstanden sind.",
-    author: "Albert Einstein"
-  },
-  {
-    text: "Man braucht nichts im Leben fürchten, man muss nur alles verstehen.",
-    author: "Marie Curie"
-  },
-  {
-    text:
-      "Es ist schwieriger, eine vorgefasste Meinung zu zertrümmern als ein Atom.",
-    author: "Albert Einstein"
-  }
-];
-
 export default class App extends Component {
-  state = { index: 0, showNewQuoteScreen: false, quotes: data };
+  state = { index: 0, showNewQuoteScreen: false, quotes: [] };
 
   _nextQuote = () => {
     this.setState(state => ({
@@ -67,6 +50,16 @@ export default class App extends Component {
     }));
   };
 
+  _deleteQuote = () => {
+    let { quotes, index } = this.state;
+    quotes.splice(index, 1);
+    this._storeData(quotes);
+    this.setState(state => ({
+      index: index > 0 ? index - 1 : 0,
+      quotes
+    }));
+  };
+
   componentDidMount() {
     this._retrieveData();
   }
@@ -77,6 +70,11 @@ export default class App extends Component {
     return (
       <View style={styles.container}>
         <StyledButton
+          style={styles.deleteButton}
+          title="Zitat löschen"
+          onPress={this._deleteQuote}
+        />
+        <StyledButton
           style={styles.newButton}
           title="Neues Zitat"
           onPress={this._showNewQuote}
@@ -85,7 +83,11 @@ export default class App extends Component {
           visible={this.state.showNewQuoteScreen}
           onSave={this._addQuote}
         />
-        <Quote text={quote.text} author={quote.author} />
+        {quote ? (
+          <Quote text={quote.text} author={quote.author} />
+        ) : (
+          <Text>Keine Zitate</Text>
+        )}
         <StyledButton
           style={styles.nextButton}
           title="Nächstes"
@@ -107,6 +109,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#eee",
     alignItems: "center",
     justifyContent: "center"
+  },
+  deleteButton: {
+    position: "absolute",
+    top: 50,
+    left: 20
   },
   newButton: {
     position: "absolute",
