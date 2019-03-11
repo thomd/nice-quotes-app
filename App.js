@@ -65,7 +65,7 @@ export default class App extends Component {
           <Button title="Nächstes" onPress={this._nextQuote} />
         </View>
         <View style={styles.prevButton}>
-          <Button title="Vorheriges Zitat" onPress={this._previousQuote} />
+          <Button title="Vorheriges" onPress={this._previousQuote} />
         </View>
       </View>
     );

@@ -9,6 +9,7 @@ import {
 
 export default class NewQuote extends Component {
   state = { content: null, author: null };
+
   render() {
     const { visible, onSave } = this.props;
     const { content, author } = this.state;
@@ -23,7 +24,7 @@ export default class NewQuote extends Component {
       >
         <KeyboardAvoidingView style={styles.container} behavior="padding">
           <TextInput
-            style={[styles.input, { height: 150 }]}
+            style={[styles.input, { height: 120 }]}
             multiline={true}
             placeholder="Inhalt des Zitats"
             underlineColorAndroid="transparent"
@@ -51,9 +52,8 @@ export default class NewQuote extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "flex-start",
-    alignItems: "center",
-    marginTop: 50
+    justifyContent: "center",
+    alignItems: "center"
   },
   input: {
     borderWidth: 1,
