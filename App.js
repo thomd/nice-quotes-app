@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { AsyncStorage, StyleSheet, Platform, View, Text } from "react-native";
+import {
+  Alert,
+  AsyncStorage,
+  StyleSheet,
+  Platform,
+  View,
+  Text
+} from "react-native";
 import Quote from "./js/components/Quote";
 import NewQuote from "./js/components/NewQuote";
 import StyledButton from "./js/components/StyledButton";
@@ -50,6 +57,17 @@ export default class App extends Component {
     }));
   };
 
+  _deleteQuoteAlert = () => {
+    Alert.alert("Zitat löschen?", "", [
+      { text: "Abbrechen", style: "cancel" },
+      {
+        text: "Löschen",
+        style: "destructive",
+        onPress: this._deleteQuote
+      }
+    ]);
+  };
+
   _deleteQuote = () => {
     let { quotes, index } = this.state;
     quotes.splice(index, 1);
@@ -73,7 +91,7 @@ export default class App extends Component {
           style={styles.deleteButton}
           visible={quotes.length > 0}
           title="Zitat löschen"
-          onPress={this._deleteQuote}
+          onPress={this._deleteQuoteAlert}
         />
         <StyledButton
           style={styles.newButton}
