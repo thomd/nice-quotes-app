@@ -71,6 +71,7 @@ export default class App extends Component {
       <View style={styles.container}>
         <StyledButton
           style={styles.deleteButton}
+          visible={quotes.length > 0}
           title="Zitat löschen"
           onPress={this._deleteQuote}
         />
@@ -90,11 +91,13 @@ export default class App extends Component {
         )}
         <StyledButton
           style={styles.nextButton}
+          visible={quotes.length > 1}
           title="Nächstes"
           onPress={this._nextQuote}
         />
         <StyledButton
           style={styles.prevButton}
+          visible={quotes.length > 1}
           title="Vorheriges"
           onPress={this._previousQuote}
         />
