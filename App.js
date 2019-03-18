@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import { Alert, StyleSheet, Platform, View, Text } from 'react-native'
+import { ActivityIndicator, Alert, StyleSheet, Platform, View, Text } from 'react-native'
 import Firebase from './js/Firebase'
 import Quote from './js/components/Quote'
 import NewQuote from './js/components/NewQuote'
 import StyledButton from './js/components/StyledButton'
 
 export default class App extends Component {
-  state = { index: 0, showNewQuoteScreen: false, quotes: [] }
+  state = { index: 0, showNewQuoteScreen: false, quotes: [], isLoading: true }
 
   _nextQuote = () => {
     this.setState(state => ({
@@ -36,12 +36,12 @@ export default class App extends Component {
         author: quote.data().author
       })
     })
-    this.setState({ quotes })
+    this.setState({ quotes, isLoading: false })
   }
 
   _saveQuoteToDB = async (text, author, quotes) => {
     let docRef = await Firebase.db.collection('quotes').add({ text, author })
-    quotes[quotes.lenght - 1].id = docRef.id
+    quotes[quotes.length - 1].id = docRef.id
   }
 
   _removeQuoteFromDB(id) {
@@ -91,7 +91,14 @@ export default class App extends Component {
   }
 
   render() {
-    let { index, quotes } = this.state
+    let { index, quotes, isLoading } = this.state
+    if (isLoading) {
+      return (
+        <View style={styles.container}>
+          <ActivityIndicator size="large" color="blue" />
+        </View>
+      )
+    }
     const quote = quotes[index]
     return (
       <View style={styles.container}>
