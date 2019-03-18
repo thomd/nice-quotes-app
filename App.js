@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import { Alert, StyleSheet, Platform, View, Text } from 'react-native'
-import { SQLite } from 'expo'
+import Firebase from './js/Firebase'
 import Quote from './js/components/Quote'
 import NewQuote from './js/components/NewQuote'
 import StyledButton from './js/components/StyledButton'
-
-const database = SQLite.openDatabase('quotes.db')
 
 export default class App extends Component {
   state = { index: 0, showNewQuoteScreen: false, quotes: [] }
@@ -28,24 +26,29 @@ export default class App extends Component {
     }))
   }
 
-  _retrieveData() {
-    database.transaction(tx =>
-      tx.executeSql('select * from quotes', [], (_, result) => {
-        this.setState({ quotes: result.rows._array })
+  _retrieveData = async () => {
+    let quotes = []
+    let query = await Firebase.db.collection('quotes').get()
+    query.forEach(quote => {
+      quotes.push({
+        id: quote.id,
+        text: quote.data().text,
+        author: quote.data().author
       })
-    )
+    })
+    this.setState({ quotes })
   }
 
-  _saveQuoteToDB(text, author, quotes) {
-    database.transaction(tx =>
-      tx.executeSql('insert into quotes (text, author) values (?,?)', [text, author], (_, result) => {
-        quotes[quotes.length - 1].id = result.insertId
-      })
-    )
+  _saveQuoteToDB = async (text, author, quotes) => {
+    let docRef = await Firebase.db.collection('quotes').add({ text, author })
+    quotes[quotes.lenght - 1].id = docRef.id
   }
 
   _removeQuoteFromDB(id) {
-    database.transaction(tx => tx.executeSql('delete from quotes where id = ?', [id]))
+    Firebase.db
+      .collection('quotes')
+      .doc(id)
+      .delete()
   }
 
   _addQuote = (text, author) => {
@@ -83,9 +86,7 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    database.transaction(tx =>
-      tx.executeSql('create table if not exists quotes (id integer primary key not null, text text, author text);')
-    )
+    Firebase.init()
     this._retrieveData()
   }
 
