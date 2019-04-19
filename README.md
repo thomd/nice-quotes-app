@@ -2,7 +2,7 @@
 
 An example React-Native app using Firebase as Data-Backend.
 
-![Quotes App Screenshot](https://raw.githubusercontent.com/thomd/nice-quotes-app/screenshots/screenshot.png)
+![Quotes App Screenshot](https://raw.githubusercontent.com/thomd/nice-quotes-app/screenshots/screenshot.png | width=100)
 
 ## Setup
 
