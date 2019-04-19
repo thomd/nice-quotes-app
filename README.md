@@ -1,6 +1,6 @@
 # Quotes React-Native App
 
-An example React-Native app.
+An example React-Native app using Firebase as Data-Backend.
 
 ## Setup
 
@@ -14,14 +14,16 @@ First create a [Firebase](https://firebase.google.com) project:
 6. Select "Project Overview" on top-left, then click on "Add an app to get started" `</>`
 7. copy-paste configuration into a file `./firebase.config.js` like this:
 
-    export default {
-       apiKey: '***',
-       authDomain: 'quotes-*****.firebaseapp.com',
-       databaseURL: 'https://quotes-*****.firebaseio.com',
-       projectId: 'quotes-*****',
-       storageBucket: 'quotes-*****.appspot.com',
-       messagingSenderId: '***'
-    }
+```javascript
+export default {
+   apiKey: '***',
+   authDomain: 'quotes-*****.firebaseapp.com',
+   databaseURL: 'https://quotes-*****.firebaseio.com',
+   projectId: 'quotes-*****',
+   storageBucket: 'quotes-*****.appspot.com',
+   messagingSenderId: '***'
+}
+```
 
 Then install [Expo](https://expo.io/) and start project
 
