@@ -1,8 +1,8 @@
 # Quotes React-Native App
 
-An example React-Native app using Firebase as Data-Backend.
+<img src="https://raw.githubusercontent.com/thomd/nice-quotes-app/screenshots/screenshot.png" style="width: 50%; float:right;">
 
-<img src="https://raw.githubusercontent.com/thomd/nice-quotes-app/screenshots/screenshot.png" width="50%">
+An example React-Native app using Firebase as Data-Backend.
 
 ## Setup
 
@@ -18,12 +18,12 @@ First create a [Firebase](https://firebase.google.com) project:
 
 ```javascript
 export default {
-   apiKey: '***',
-   authDomain: 'quotes-*****.firebaseapp.com',
-   databaseURL: 'https://quotes-*****.firebaseio.com',
-   projectId: 'quotes-*****',
-   storageBucket: 'quotes-*****.appspot.com',
-   messagingSenderId: '***'
+  apiKey: '***',
+  authDomain: 'quotes-***.firebaseapp.com',
+  databaseURL: 'https://quotes-***.firebaseio.com',
+  projectId: 'quotes-***',
+  storageBucket: 'quotes-***.appspot.com',
+  messagingSenderId: '***'
 }
 ```
 
