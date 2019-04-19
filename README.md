@@ -1,8 +1,8 @@
 # Quotes React-Native App
 
-<img src="https://raw.githubusercontent.com/thomd/nice-quotes-app/screenshots/screenshot.png" style="width: 50%; float:right;">
-
 An example React-Native app using Firebase as Data-Backend.
+
+<img src="https://raw.githubusercontent.com/thomd/nice-quotes-app/screenshots/screenshot.png" width="50%">
 
 ## Setup
 
